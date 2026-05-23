@@ -6,10 +6,11 @@
     <title>Ari's Birthday Surprise 🎂</title>
     <style>
         :root {
-            --primary: #ff6b8b;
-            --secondary: #ff8e72;
-            --dark: #2d3436;
-            --light: #fff5f5;
+            --bg-color: #000000;
+            --pink-glow: #ff0055;
+            --red-glow: #ff0000;
+            --text-color: #ffffff;
+            --card-bg: #0a0a0a;
         }
 
         * {
@@ -20,13 +21,38 @@
         }
 
         body {
-            background: linear-gradient(135deg, #ffeef2 0%, #fff1eb 100%);
-            color: var(--dark);
+            background-color: var(--bg-color);
+            color: var(--text-color);
             min-height: 100vh;
-            padding-bottom: 50px;
+            overflow-x: hidden;
+            position: relative;
+            padding-bottom: 80px;
         }
 
-        /* Music Floating Control */
+        /* Floating Background Emojis */
+        .bg-emojis {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-emoji {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.25;
+            animation: float-around 12s linear infinite;
+        }
+
+        @keyframes float-around {
+            0% { transform: translateY(105vh) rotate(0deg); }
+            100% { transform: translateY(-10vh) rotate(360deg); }
+        }
+
+        /* Music Controls */
         .music-container {
             position: fixed;
             top: 20px;
@@ -35,85 +61,92 @@
         }
 
         .music-btn {
-            background: rgba(255, 107, 139, 0.9);
+            background: rgba(255, 0, 85, 0.1);
             color: white;
-            border: none;
+            border: 2px solid var(--pink-glow);
             padding: 12px 20px;
             border-radius: 50px;
             cursor: pointer;
             font-weight: bold;
-            box-shadow: 0 4px 15px rgba(255, 107, 139, 0.3);
+            text-shadow: 0 0 8px var(--pink-glow);
+            box-shadow: 0 0 15px rgba(255, 0, 85, 0.4);
             display: flex;
             align-items: center;
             gap: 8px;
+            backdrop-filter: blur(5px);
             transition: all 0.3s;
         }
 
         .music-btn:hover {
             transform: scale(1.05);
-            background: var(--primary);
+            background: var(--pink-glow);
+            box-shadow: 0 0 25px var(--pink-glow);
         }
 
         /* Header / Hero Section */
         header {
             text-align: center;
-            padding: 80px 20px 40px;
-            background: white;
-            border-bottom-left-radius: 50px;
-            border-bottom-right-radius: 50px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            padding: 100px 20px 40px;
+            position: relative;
+            z-index: 1;
         }
 
         header h1 {
-            color: var(--primary);
-            font-size: 2.2rem;
+            color: #fff;
+            font-size: 2.5rem;
             margin-bottom: 15px;
             line-height: 1.3;
+            text-shadow: 0 0 10px var(--pink-glow), 0 0 20px var(--red-glow);
         }
 
         header p {
-            color: #666;
-            font-size: 1.1rem;
+            color: #eee;
+            font-size: 1.2rem;
             font-weight: 500;
+            text-shadow: 0 0 8px var(--pink-glow);
         }
 
-        /* Photo Grid Section */
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 40px auto;
             padding: 0 20px;
+            position: relative;
+            z-index: 1;
         }
 
         .section-title {
             text-align: center;
-            color: var(--primary);
-            margin-bottom: 30px;
-            font-size: 1.6rem;
-            position: relative;
+            color: #fff;
+            margin: 60px 0 30px;
+            font-size: 1.8rem;
+            text-shadow: 0 0 10px var(--pink-glow);
         }
 
+        /* Photo Grid Section */
         .photo-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 50px;
+            gap: 30px;
         }
 
         .photo-card {
-            background: white;
+            background: var(--card-bg);
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+            box-shadow: 0 0 20px rgba(0,0,0,0.9);
+            border: 1px solid rgba(255, 0, 85, 0.2);
+            transition: transform 0.3s, border-color 0.3s;
         }
 
         .photo-card:hover {
             transform: translateY(-5px);
+            border-color: var(--red-glow);
+            box-shadow: 0 0 25px var(--pink-glow);
         }
 
         .photo-card img {
             width: 100%;
-            height: 320px;
+            height: 350px;
             object-fit: cover;
             display: block;
         }
@@ -122,29 +155,59 @@
             padding: 15px;
             text-align: center;
             font-weight: 600;
-            color: #555;
+            color: #fff;
             font-size: 0.95rem;
-            border-top: 1px solid #fff0f2;
+            background: #000;
+            text-shadow: 0 0 5px var(--pink-glow);
+        }
+
+        /* Identity / Certificates Section */
+        .identity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .identity-card {
+            background: #050505;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px dashed var(--pink-glow);
+            box-shadow: 0 0 15px rgba(255, 0, 85, 0.1);
+        }
+
+        .identity-card h3 {
+            color: #fff;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+            text-shadow: 0 0 8px var(--red-glow);
+        }
+
+        .identity-card p {
+            color: #ddd;
+            font-size: 0.95rem;
+            line-height: 1.4;
         }
 
         /* Words For You Section */
         .message-box {
-            background: white;
-            padding: 30px;
+            background: #050505;
+            padding: 35px;
             border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(255, 107, 139, 0.1);
-            border-left: 5px solid var(--primary);
-            margin-bottom: 50px;
+            box-shadow: 0 0 25px rgba(255, 0, 85, 0.2);
+            border: 1px solid var(--pink-glow);
             line-height: 1.8;
-            font-size: 1.05rem;
-            white-space: pre-wrap; /* Keeps paragraphs spaced nicely */
-            color: #444;
+            font-size: 1.1rem;
+            white-space: pre-wrap;
+            color: #fff;
+            text-shadow: 0 0 2px rgba(255,255,255,0.3);
         }
 
         /* Gifts Section */
         .gift-section {
             text-align: center;
-            margin-top: 40px;
+            margin-top: 60px;
         }
 
         .gift-container {
@@ -156,32 +219,52 @@
         }
 
         .gift-box {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: #000;
             color: white;
-            border: none;
+            border: 2px solid var(--pink-glow);
             padding: 18px 35px;
             font-size: 1.1rem;
             font-weight: bold;
             border-radius: 15px;
             cursor: pointer;
-            box-shadow: 0 6px 20px rgba(255, 107, 139, 0.2);
+            text-shadow: 0 0 5px var(--pink-glow);
+            box-shadow: 0 0 15px rgba(255, 0, 85, 0.3);
             transition: all 0.3s;
         }
 
         .gift-box:hover {
             transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 8px 25px rgba(255, 107, 139, 0.3);
+            background: var(--pink-glow);
+            box-shadow: 0 0 25px var(--red-glow);
         }
 
-        /* Custom Popup Modal for Gift 3 */
+        /* Extra Ending Text Section */
+        .ending-text {
+            text-align: center;
+            margin-top: 80px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+            line-height: 1.5;
+            padding: 0 20px;
+            text-shadow: 0 0 15px var(--pink-glow), 0 0 30px var(--red-glow);
+            animation: pulse 2s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.98); }
+            100% { transform: scale(1.02); }
+        }
+
+        /* Custom Popup Modal for Gifts */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -198,16 +281,16 @@
         }
 
         .modal-content {
-            background: white;
-            padding: 25px;
+            background: #000000;
+            padding: 30px;
             border-radius: 25px;
             max-width: 400px;
             width: 100%;
             text-align: center;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            border: 2px solid var(--pink-glow);
+            box-shadow: 0 0 35px var(--red-glow);
             transform: scale(0.8);
             transition: transform 0.4s ease;
-            position: relative;
         }
 
         .modal-overlay.active .modal-content {
@@ -220,42 +303,47 @@
             object-fit: cover;
             border-radius: 18px;
             margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 0 15px rgba(255,0,0,0.5);
+            display: none; /* Hidden by default, shown only for gift 3 */
         }
 
         .modal-text {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: bold;
-            color: var(--primary);
+            color: #fff;
+            text-shadow: 0 0 8px var(--pink-glow);
+            margin-bottom: 20px;
             line-height: 1.4;
-            margin-bottom: 15px;
         }
 
         .close-btn {
-            background: #f1f2f6;
-            color: #333;
-            border: none;
+            background: #111;
+            color: #fff;
+            border: 1px solid var(--pink-glow);
             padding: 10px 25px;
             border-radius: 50px;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.2s;
         }
 
         .close-btn:hover {
-            background: #e4e7eb;
+            background: var(--pink-glow);
+            box-shadow: 0 0 10px var(--pink-glow);
         }
     </style>
 </head>
 <body>
 
+    <div class="bg-emojis" id="emojiBg"></div>
+
     <audio id="bg-music" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        <source src="https://pub-c5e31b5cdafb419a824f6118d862e740.r2.dev/Stephen_Sanchez_-_Until_I_Found_You.mp3" type="audio/mpeg">
     </audio>
 
     <div class="music-container">
         <button class="music-btn" onclick="toggleMusic()">
-            <span id="music-icon">🎵</span> <span id="music-text">Play Music</span>
+            <span id="music-icon">🎵</span> <span id="music-text">Play "Until I Found You"</span>
         </button>
     </div>
 
@@ -286,6 +374,22 @@
             </div>
         </div>
 
+        <h2 class="section-title">Verified Identity Badges 🎖️</h2>
+        <div class="identity-grid">
+            <div class="identity-card">
+                <h3>Certified Cute 🥰</h3>
+                <p>100% verified by Devi Jii. No debate allowed, hands down the most adorable baby boy ever.</p>
+            </div>
+            <div class="identity-card">
+                <h3>Gadhu Prasad Boss 👑</h3>
+                <p>Official titleholder of the most lovely aalu, tamatar, and handsome bhuddha in existence.</p>
+            </div>
+            <div class="identity-card">
+                <h3>The Boyfieee ✨</h3>
+                <p>Strictly locked and registered under one and only Certified Baddie Devi Jii 💃💋</p>
+            </div>
+        </div>
+
         <h2 class="section-title">Words For You 📝❤️</h2>
         <div class="message-box">Happiesssttttttttt birthdayyyyyyyyy ariiiiiiiiii🎂🥂🎉🎊
 I wish u a very happy birthday my gadhu prasad may god bless u (i will bless u for sure my babyyy) 😊💗i wish for ur good health wealth and success 💗🍷 and i wish i could wish a peaceful life for u but it can't happen untill i m with u hahahaha so adjust krlo 🤙cuz mere jaisi pyaari bacchi nhi milegi 😉😉 tum bhi pyaare ho yaawwrrr aap toh mere cutie patootie ho pr mai jyda acchi hu 😁😝 and most importantly u r my favourite gadhuuuu i meannnn my fav boyyyyy 💖and u will remain my fav baby boy forever 😙 i hope this birthday gives u lots of happiness , good memories , good food , health , wealth and success ❤❤ and a lottttttt of love 😙💖 u r going to be a bhuddha of 15 years but still i wanna tell u that u r my cutieeeeepieeeeee my babygirlllll my sweetieeee princess💋and i love u so much mera pyaaraaaaaa bacchaaaaaaa always remain same as wonderful u r ik one day or a year isn't enough to celebrate someone as special as u r u r the most funny cutu and attractive aalu, tamatar i met and i love u for all ur ravan jaisa hassi , ur way of talking there isn't one thing to mention there is alot but i wanna remind u that u r so special and always remain same cuz u r perfectttttttt ❤❤❤k my cutuuuuuuuu once again happy birthday honey ❤ and yaa tu bhuddha ho jayega yrrr 1 saal aur bhuddha hogya hahaha 😂😂 koi ni u r still handsome boyfieeeee my 15 yrs old bhuddhe 😁😁💋 ummmaaahhhhhh❤
@@ -293,7 +397,7 @@ And thnks for existing aaluuuuuuu💖💖</div>
 
         <div class="gift-section">
             <h2 class="section-title">Your Special Gifts 🎁</h2>
-            <p style="color: #777; font-size: 0.95rem;">Pick wisely, you only get what you tap! 😉</p>
+            <p style="color: #aaa; font-size: 0.95rem;">Pick wisely, you only get what you tap! 😉</p>
             <div class="gift-container">
                 <button class="gift-box" onclick="clickGift1()">Gift 1 🎁</button>
                 <button class="gift-box" onclick="clickGift2()">Gift 2 🎁</button>
@@ -301,17 +405,35 @@ And thnks for existing aaluuuuuuu💖💖</div>
             </div>
         </div>
 
+        <div class="ending-text">
+            happiesttttttt birthdayyyyyyyy aruuuuuuuuu i loveeeee youuuuui soooo muchhhhhhh babyyyyyy❤💋
+        </div>
+
     </div>
 
     <div class="modal-overlay" id="giftModal">
         <div class="modal-content">
-            <img src="IMG-20260523-WA0001.jpg" alt="The Ultimate Gift">
-            <div class="modal-text">mere se accha gift kch ho skta h kya hehe 😌💘</div>
+            <img src="IMG-20260523-WA0001.jpg" id="modalImage" alt="The Ultimate Gift">
+            <div class="modal-text" id="modalText"></div>
             <button class="close-btn" onclick="closeGiftModal()">Close 💖</button>
         </div>
     </div>
 
     <script>
+        // Generate Floating Background Emojis Dynamically
+        const emojis = ['🎂', '💖', '✨', '💃', '💋', '🍼', '🎈', '❤️', '🧁'];
+        const emojiBg = document.getElementById('emojiBg');
+        
+        for (let i = 0; i < 35; i++) {
+            const span = document.createElement('span');
+            span.className = 'floating-emoji';
+            span.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            span.style.left = Math.random() * 100 + 'vw';
+            span.style.animationDelay = Math.random() * 12 + 's';
+            span.style.animationDuration = (Math.random() * 8 + 8) + 's';
+            emojiBg.appendChild(span);
+        }
+
         // Music Play/Pause Logic
         const music = document.getElementById('bg-music');
         const musicBtnText = document.getElementById('music-text');
@@ -319,32 +441,41 @@ And thnks for existing aaluuuuuuu💖💖</div>
 
         function toggleMusic() {
             if (music.paused) {
-                music.play().catch(err => console.log("Audio play needs user interaction first"));
+                music.play().catch(err => console.log("Audio play needs user interaction"));
                 musicBtnText.innerText = "Pause Music";
                 musicIcon.innerText = "⏸️";
             } else {
                 music.pause();
-                musicBtnText.innerText = "Play Music";
+                musicBtnText.innerText = 'Play "Until I Found You"';
                 musicIcon.innerText = "🎵";
             }
         }
 
-        // Gift Section Interactivity
+        // Fixed Gift Section Interactivity (No browser names anymore!)
+        const modal = document.getElementById('giftModal');
+        const modalText = document.getElementById('modalText');
+        const modalImg = document.getElementById('modalImage');
+
         function clickGift1() {
-            alert("oops 😔 try next one");
+            modalImg.style.display = 'none'; // Hide photo
+            modalText.innerText = "oops 😔 try next one";
+            modal.classList.add('active');
         }
 
         function clickGift2() {
-            alert("better luck next time gadhu prasad 💀✨");
+            modalImg.style.display = 'none'; // Hide photo
+            modalText.innerText = "better luck next time gadhu prasad 💀✨";
+            modal.classList.add('active');
         }
 
         function clickGift3() {
-            // Reveals the beautiful locked custom overlay modal
-            document.getElementById('giftModal').classList.add('active');
+            modalImg.style.display = 'block'; // Show surprise photo
+            modalText.innerText = "mere se accha gift kch ho skta h kya hehe 😌💘";
+            modal.classList.add('active');
         }
 
         function closeGiftModal() {
-            document.getElementById('giftModal').classList.remove('active');
+            modal.classList.remove('active');
         }
     </script>
 </body>
