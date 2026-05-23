@@ -3,398 +3,348 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MY PRETTY LITTLE BABY BDAYYYYY 🎂💘✨</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>Ari's Birthday Surprise 🎂</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         :root {
-            --bg-color: #050505;
-            --primary-glow: #ff0055;
-            --secondary-glow: #ff5e00;
-            --text-color: #ffffff;
-            --card-bg: #1a1a1a;
+            --primary: #ff6b8b;
+            --secondary: #ff8e72;
+            --dark: #2d3436;
+            --light: #fff5f5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Montserrat', sans-serif;
-            overflow-x: hidden;
+            background: linear-gradient(135deg, #ffeef2 0%, #fff1eb 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            padding-bottom: 50px;
         }
 
-        .bg-elements {
+        /* Music Floating Control */
+        .music-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .music-btn {
+            background: rgba(255, 107, 139, 0.9);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255, 107, 139, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.05);
+            background: var(--primary);
+        }
+
+        /* Header / Hero Section */
+        header {
+            text-align: center;
+            padding: 80px 20px 40px;
+            background: white;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        header h1 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        header p {
+            color: #666;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Photo Grid Section */
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 30px;
+            font-size: 1.6rem;
+            position: relative;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .photo-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .caption {
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+            color: #555;
+            font-size: 0.95rem;
+            border-top: 1px solid #fff0f2;
+        }
+
+        /* Words For You Section */
+        .message-box {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(255, 107, 139, 0.1);
+            border-left: 5px solid var(--primary);
+            margin-bottom: 50px;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            white-space: pre-wrap; /* Keeps paragraphs spaced nicely */
+            color: #444;
+        }
+
+        /* Gifts Section */
+        .gift-section {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .gift-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .gift-box {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 18px 35px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 15px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(255, 107, 139, 0.2);
+            transition: all 0.3s;
+        }
+
+        .gift-box:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 25px rgba(255, 107, 139, 0.3);
+        }
+
+        /* Custom Popup Modal for Gift 3 */
+        .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .floating-item {
-            position: absolute;
-            opacity: 0.4;
-            animation: floatUp 8s linear infinite;
-            font-size: 1.5rem;
-        }
-
-        @keyframes floatUp {
-            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.5; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-        }
-
-        h1, h2 { font-family: 'Dancing Script', cursive; }
-
-        .glow-text {
-            text-shadow: 0 0 10px var(--primary-glow), 0 0 20px var(--primary-glow), 0 0 40px var(--secondary-glow);
-        }
-
-        .container { max-width: 800px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
-
-        section {
-            margin: 100px 0;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s ease;
-        }
-
-        section.visible { opacity: 1; transform: translateY(0); }
-
-        header {
-            height: 100vh;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: radial-gradient(circle at center, #1a000a 0%, #050505 70%);
-        }
-
-        .main-title { font-size: 2.5rem; margin-bottom: 20px; color: #ffb3c6; text-align: center; }
-
-        .scroll-indicator {
-            margin-top: 60px;
-            font-size: 2rem;
-            animation: bounce 2s infinite;
-            cursor: pointer;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-15px);}
-            60% {transform: translateY(-5px);}
-        }
-
-        .intro-title { font-size: 2.8rem; color: #ff4d4d; margin-bottom: 15px; }
-
-        .intro-subtitle {
-            font-size: 1rem;
-            color: #ffb3c6;
-            border: 1px solid var(--primary-glow);
-            padding: 15px 25px;
-            border-radius: 15px;
-            background: rgba(255, 0, 85, 0.1);
-            display: inline-block;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .photo-card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            border: 2px solid transparent;
-            transition: 0.3s;
-        }
-
-        .photo-card:hover {
-            transform: scale(1.03);
-            border-color: var(--primary-glow);
-            box-shadow: 0 0 20px var(--primary-glow);
-        }
-
-        .photo-img {
-            width: 100%;
-            height: 280px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .caption { padding: 15px; font-size: 0.95rem; color: #ffb3c6; }
-
-        .tags-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .tag {
-            background: rgba(20, 20, 20, 0.9);
-            padding: 12px 25px;
-            border-radius: 50px;
-            border: 1px solid var(--primary-glow);
-            font-size: 1.1rem;
-            animation: glow 2s infinite alternate;
-            transition: 0.3s;
-        }
-
-        .tag:hover { transform: scale(1.1); }
-
-        @keyframes glow {
-            from { box-shadow: 0 0 5px var(--primary-glow); }
-            to { box-shadow: 0 0 20px var(--primary-glow), 0 0 10px var(--secondary-glow); }
-        }
-
-        .message-card {
-            background: linear-gradient(145deg, #1a000a, #000000);
-            border: 2px solid #ff0055;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 0 30px rgba(255, 0, 85, 0.3);
-            line-height: 1.8;
-            text-align: left;
-        }
-
-        .message-card p { margin-bottom: 15px; }
-        .message-card p:last-child { margin-bottom: 0; }
-
-        .gift-btn {
-            width: 100%;
-            max-width: 350px;
-            padding: 25px;
-            background: #1a1a1a;
-            border: 2px solid var(--primary-glow);
-            border-radius: 15px;
-            color: white;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: 0.3s;
-            margin: 10px auto;
-        }
-
-        .gift-btn:hover {
-            background: var(--primary-glow);
-            color: black;
-            transform: scale(1.05);
-        }
-
-        .gift-special { border-color: #ffd700; }
-
-        .final-title { font-size: 3rem; margin-bottom: 20px; }
-
-        .music-control {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(0,0,0,0.8);
-            border: 2px solid var(--primary-glow);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 50px;
-            cursor: pointer;
-            z-index: 100;
-            font-size: 1rem;
-        }
-
-        /* FIXED: Hidden player style to ensure audio works seamlessly across all devices */
-        .youtube-player {
-            position: fixed;
-            top: -100px;
-            left: -100px;
-            width: 10px;
-            height: 10px;
+            z-index: 2000;
+            opacity: 0;
             pointer-events: none;
-            z-index: -999;
+            transition: opacity 0.4s ease;
+            padding: 20px;
         }
 
-        @media (max-width: 600px) {
-            .main-title { font-size: 2rem; }
-            .intro-title { font-size: 2rem; }
-            .final-title { font-size: 2.2rem; }
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 25px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            transform: scale(0.8);
+            transition: transform 0.4s ease;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border-radius: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .modal-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary);
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+
+        .close-btn {
+            background: #f1f2f6;
+            color: #333;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .close-btn:hover {
+            background: #e4e7eb;
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-elements" id="bg-elements"></div>
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
 
-    <!-- YouTube Players (Hidden) -->
-    <div class="youtube-player">
-        <div id="player1"></div>
+    <div class="music-container">
+        <button class="music-btn" onclick="toggleMusic()">
+            <span id="music-icon">🎵</span> <span id="music-text">Play Music</span>
+        </button>
     </div>
-    <div class="youtube-player">
-        <div id="player2"></div>
-    </div>
-
-    <button class="music-control" id="musicBtn" onclick="toggleMusic()">🎵 Play Music</button>
 
     <header>
-        <h1 class="main-title glow-text">MY PRETTY LITTLE BABY BDAYYYYY 🎂💘✨</h1>
-        <p style="color: #666; margin-bottom: 30px;">For Aaluuu 💕</p>
-        <div class="scroll-indicator" onclick="document.getElementById('intro').scrollIntoView({behavior: 'smooth'})">↓</div>
+        <h1>MY PRETTY LITTLE BABY BIRTHDAYYYYY 2026 🎂💘✨</h1>
+        <p>warning ⚠️ this website contains one certified baddie devi jii ka boyfieeeeee✨💃</p>
     </header>
 
     <div class="container">
         
-        <!-- 1. Intro -->
-        <section id="intro">
-            <h2 class="intro-title glow-text">welcome to ravuuuuverse 👀✨</h2>
-            <div class="intro-subtitle">
-                warning ⚠️ this website contains one certified mera bacchaaaa 🍼🥔💘
+        <h2 class="section-title">Cutest Memories ✨</h2>
+        <div class="photo-grid">
+            <div class="photo-card">
+                <img src="IMG-20260523-WA0004.jpg" alt="Memory 1">
+                <div class="caption">u make me look so small but ur heart is huge 💖🥺</div>
             </div>
-        </section>
+            <div class="photo-card">
+                <img src="IMG-20260523-WA0003.jpg" alt="Memory 2">
+                <div class="caption">look at that smile, absolute definition of cuteness 🐰💘</div>
+            </div>
+            <div class="photo-card">
+                <img src="IMG-20260523-WA0005.jpg" alt="Memory 3">
+                <div class="caption">mera pyaaraaaa bacchaaaaa 🍼💘</div>
+            </div>
+            <div class="photo-card">
+                <img src="IMG-20260523-WA0000.jpg" alt="Memory 4">
+                <div class="caption">always holding onto u forever and ever 🫂✨</div>
+            </div>
+        </div>
 
-        <!-- 2. Photo Gallery -->
-        <section id="gallery">
-            <h2 class="glow-text" style="margin-bottom: 30px;">Photo Gallery 💖</h2>
-            <div class="gallery-grid">
-                <div class="photo-card">
-                    <img class="photo-img" src="https://kommodo.ai/i/yvhRp8AE3gqqVlWjFN3R" alt="Pic 1">
-                    <div class="caption">positive vibes only 🔪 unless someone steals his food 😔✨</div>
-                </div>
-                <div class="photo-card">
-                    <img class="photo-img" src="https://kommodo.ai/i/MbX6HjVIzrrFof16wczo" alt="Pic 2">
-                    <div class="caption">attitude at age 4 is crazy work 😭✨</div>
-                </div>
-                <div class="photo-card">
-                    <img class="photo-img" src="https://kommodo.ai/i/r3jXSGfl9n6z90IOQbDf" alt="Pic 3">
-                    <div class="caption">mera pyaaraaaa bacchaaaaa 🍼💘</div>
-                </div>
-                <div class="photo-card">
-                    <img class="photo-img" src="https://kommodo.ai/i/qeaJIbXbWLkaAeDVJbRV" alt="Pic 4">
-                    <div class="caption">how r u this pretty and still gadhu prasad 💀💘</div>
-                </div>
-                <div class="photo-card">
-                    <img class="photo-img" src="https://kommodo.ai/i/b9BBwAqsxygeQoNQUe1j" alt="Pic 5">
-                    <div class="caption">mere se accha gift kch ho skta h kya hehe 😌💘</div>
-                </div>
-            </div>
-        </section>
+        <h2 class="section-title">Words For You 📝❤️</h2>
+        <div class="message-box">Happiesssttttttttt birthdayyyyyyyyy ariiiiiiiiii🎂🥂🎉🎊
+I wish u a very happy birthday my gadhu prasad may god bless u (i will bless u for sure my babyyy) 😊💗i wish for ur good health wealth and success 💗🍷 and i wish i could wish a peaceful life for u but it can't happen untill i m with u hahahaha so adjust krlo 🤙cuz mere jaisi pyaari bacchi nhi milegi 😉😉 tum bhi pyaare ho yaawwrrr aap toh mere cutie patootie ho pr mai jyda acchi hu 😁😝 and most importantly u r my favourite gadhuuuu i meannnn my fav boyyyyy 💖and u will remain my fav baby boy forever 😙 i hope this birthday gives u lots of happiness , good memories , good food , health , wealth and success ❤❤ and a lottttttt of love 😙💖 u r going to be a bhuddha of 15 years but still i wanna tell u that u r my cutieeeeepieeeeee my babygirlllll my sweetieeee princess💋and i love u so much mera pyaaraaaaaa bacchaaaaaaa always remain same as wonderful u r ik one day or a year isn't enough to celebrate someone as special as u r u r the most funny cutu and attractive aalu, tamatar i met and i love u for all ur ravan jaisa hassi , ur way of talking there isn't one thing to mention there is alot but i wanna remind u that u r so special and always remain same cuz u r perfectttttttt ❤❤❤k my cutuuuuuuuu once again happy birthday honey ❤ and yaa tu bhuddha ho jayega yrrr 1 saal aur bhuddha hogya hahaha 😂😂 koi ni u r still handsome boyfieeeee my 15 yrs old bhuddhe 😁😁💋 ummmaaahhhhhh❤
+And thnks for existing aaluuuuuuu💖💖</div>
 
-        <!-- 3. Nickname Section -->
-        <section id="nicknames">
-            <h2 class="glow-text" style="margin-bottom: 30px;">The Identity 💫</h2>
-            <div class="tags-container">
-                <span class="tag">aaluuu 🥔</span>
-                <span class="tag">aaru 🌌</span>
-                <span class="tag">gadhu prasad 💀</span>
-                <span class="tag">ravannnnn 😂</span>
-                <span class="tag">tamatar 🍅</span>
-                <span class="tag">bubuuuu 🐣</span>
-                <span class="tag">baby girl 🎀</span>
-                <span class="tag">princess 👑</span>
-                <span class="tag">mera bacchaaaa 🍼</span>
-                <span class="tag">honeyyy 💘</span>
+        <div class="gift-section">
+            <h2 class="section-title">Your Special Gifts 🎁</h2>
+            <p style="color: #777; font-size: 0.95rem;">Pick wisely, you only get what you tap! 😉</p>
+            <div class="gift-container">
+                <button class="gift-box" onclick="clickGift1()">Gift 1 🎁</button>
+                <button class="gift-box" onclick="clickGift2()">Gift 2 🎁</button>
+                <button class="gift-box" onclick="clickGift3()">Gift 3 🎁</button>
             </div>
-        </section>
-
-        <!-- 4. Long Birthday Message -->
-        <section id="message">
-            <h2 class="glow-text" style="margin-bottom: 30px;">Words For You 💌</h2>
-            <div class="message-card glow-text">
-                <p>Hey Aaluuu,</p>
-                <p>🥔✨ Another year older! Can you believe it? I personally can't handle how fast time flies. One moment you're stealing chapatis from my plate and the next you're... well, still stealing chapatis but legally older now. 😌</p>
-                <p>You are literally the only person who can make me go from "I'm gonna kill this boy" to "Okay but he's cute tho" in 0.2 seconds. That takes talent.</p>
-                <p>Thank you for being the chaotic, cute, dramatic, sweet potato in my life. 🥔💘</p>
-                <p>Happy Birthday, my pretty little baby. 🎂✨</p>
-                <p>- Your favorite human 😌💘</p>
-            </div>
-        </section>
-
-        <!-- 5. Gift Section -->
-        <section id="gift">
-            <h2 class="glow-text" style="margin-bottom: 30px;">Gift Time 🎁</h2>
-            <div class="gift-btn" onclick="alert('🥔💀 Oops! Gift gone! Try again next year gadhu prasad!')">
-                🎁 Gift 1: "oops 😔 try next one"
-            </div>
-            <div class="gift-btn" onclick="alert('💀✨ Better luck next time gadhu prasad! Come back with sorry meme energy!')">
-                🎁 Gift 2: "better luck next time gadhu prasad 💀✨"
-            </div>
-            <div class="gift-btn gift-special" onclick="alert('😌💘 Mere se accha gift? Kch ho skta h kya? Hehe... Love you! 🎂')">
-                🎁 Gift 3: "mere se accha gift kch ho skta h kya hehe 😌💘"
-            </div>
-        </section>
-
-        <!-- 6. Final Section -->
-        <section id="final">
-            <h2 class="final-title glow-text">HAPPY BIRTHDAY AALUUUU 🥔💘✨</h2>
-            <p class="intro-subtitle">positive vibes only 🔪 unless someone steals his food 😔✨</p>
-        </section>
+        </div>
 
     </div>
 
-    <!-- YouTube IFrame API -->
-    <script src="https://www.youtube.com/iframe_api"></script>
+    <div class="modal-overlay" id="giftModal">
+        <div class="modal-content">
+            <img src="IMG-20260523-WA0001.jpg" alt="The Ultimate Gift">
+            <div class="modal-text">mere se accha gift kch ho skta h kya hehe 😌💘</div>
+            <button class="close-btn" onclick="closeGiftModal()">Close 💖</button>
+        </div>
+    </div>
 
     <script>
-        // Create floating hearts and stars
-        const bgContainer = document.getElementById('bg-elements');
-        const emojis = ['💖', '💘', '✨', '🌟', '💀', '🥔', '🍅', '🐣', '🎀', '👑'];
+        // Music Play/Pause Logic
+        const music = document.getElementById('bg-music');
+        const musicBtnText = document.getElementById('music-text');
+        const musicIcon = document.getElementById('music-icon');
 
-        for (let i = 0; i < 20; i++) {
-            const item = document.createElement('div');
-            item.className = 'floating-item';
-            item.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-            item.style.left = Math.random() * 100 + 'vw';
-            item.style.animationDuration = (5 + Math.random() * 5) + 's';
-            item.style.animationDelay = Math.random() * 5 + 's';
-            bgContainer.appendChild(item);
+        function toggleMusic() {
+            if (music.paused) {
+                music.play().catch(err => console.log("Audio play needs user interaction first"));
+                musicBtnText.innerText = "Pause Music";
+                musicIcon.innerText = "⏸️";
+            } else {
+                music.pause();
+                musicBtnText.innerText = "Play Music";
+                musicIcon.innerText = "🎵";
+            }
         }
 
-        // Scroll Animation Using IntersectionObserver
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
-
-        // Background Music Controls via YouTube API
-        let player1, player2;
-        let isPlaying = false;
-
-        const yt1 = "4uaYKf5Yd_k";
-        const yt2 = "6U2zhzP-tbQ";
-
-        function onYouTubeIframeAPIReady() {
-            player1 = new YT.Player('player1', {
-                videoId: yt1,
-                playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': yt1 }
-            });
-            
-            player2 = new YT.Player('player2', {
-                videoId: yt2,
-                playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': yt2 }
-            });
+        // Gift Section Interactivity
+        function clickGift1() {
+            alert("oops 😔 try next one");
         }
 
-        function toggleMusic() { 
-            const btn = document.getElementById('musicBtn');
+        function clickGift2() {
+            alert("better luck next time gadhu prasad 💀✨");
+        }
 
-            if (!isPlaying) { 
-                if (player1 && typeof player1.playVideo === 'function') { player1.playVideo(); } 
-                isPlaying = true; 
-                btn.innerText = "⏸ Pause Music"; 
-            } else { 
-                if (player1 && typeof player1.pauseVideo === 'function') { player1.pauseVideo(); } 
-                if (player2 && typeof player2.pauseVideo === 'function') { player2.pauseVideo(); } 
-                isPlaying = false; 
-                btn.innerText = "🎵 Play Music"; 
-            } 
+        function clickGift3() {
+            // Reveals the beautiful locked custom overlay modal
+            document.getElementById('giftModal').classList.add('active');
+        }
+
+        function closeGiftModal() {
+            document.getElementById('giftModal').classList.remove('active');
         }
     </script>
 </body>
